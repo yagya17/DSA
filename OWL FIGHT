@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;	
+int par[100001];
+int find_par(int o)
+	{
+       if(par[o]<0) return o;
+	   int x=find_par(par[o]);
+         par[o]=x;
+	    return x;
+	}
+	void uni(int a,int b)
+	{
+		par[a]=min(par[a],par[b]);
+		par[b]=a;
+	}
+int main() {
+	int n;int m;
+	cin>>n>>m;
+	
+	for(int i=1;i<=n;i++)
+	{par[i]=-i;}
+	for(int i=1;i<=m;i++)
+	{
+		int u;int v;
+		cin>>u;cin>>v;
+		int a=find_par(u);int b=find_par(v);
+		if(a!=b) uni(u,v);
+	}
+	int t;cin>>t;
+	while(t--)
+	{
+		int x;int y;cin>>x;cin>>y;
+		int p=find_par(x);int q=find_par(y);
+		if(p==q) cout<<"TIE"<<endl;
+		else {if(par[p]<par[q]) cout<<x<<endl;
+		else cout<<y<<endl;} 
+
+
+	}
+
+}
