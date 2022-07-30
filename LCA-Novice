@@ -1,23 +1,14 @@
-/******************************************************************************
-
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
-Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
 #include <bits/stdc++.h>
 using namespace std;
 int level[100001];
 vector<int> rel[100001];
-int vis[100001];
-void dfs(int key, int lvl)
+void dfs(int key, int lvl,int par)
 {
   level[key]=lvl;
   vis[key]=1;
   for(int i=0;i<rel[key].size();i++)
   {
-    if(vis[rel[key][i]]==0) dfs(rel[key][i],lvl+1);
+    if(rel[key][i]==par) dfs(rel[key][i],lvl+1,key);
   }
   
 }
@@ -44,7 +35,7 @@ int main()
      rel[a].push_back(b);
      rel[b].push_back(a);
    }
-   dfs(1,0);
+   dfs(1,0,-1);
    
    
    
