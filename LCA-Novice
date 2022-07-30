@@ -5,10 +5,9 @@ vector<int> rel[100001];
 void dfs(int key, int lvl,int par)
 {
   level[key]=lvl;
-  vis[key]=1;
   for(int i=0;i<rel[key].size();i++)
   {
-    if(rel[key][i]==par) dfs(rel[key][i],lvl+1,key);
+    if(rel[key][i]!=par) dfs(rel[key][i],lvl+1,key);
   }
   
 }
@@ -28,7 +27,7 @@ int lca(int a,int b)
 int main()
 {   int n;cin>>n; //no. of nodes
 
-   for(int i=1;i<n;i++)
+   for(int i=1;i<n;i++) //edges=n-1 (trees)
    {
      int a; cin>>a;
      int b;cin>>b;
