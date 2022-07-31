@@ -1,0 +1,48 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main()
+{
+    int n;cin>>n;int m;cin>>m;
+    int dist[n+1];
+vector<pair<int,int>>rel[m];
+    for(int i=0;i<=n;i++)
+    {
+      dist[i]=INT_MAX;
+    }
+    for(int i=0;i<m;i++)
+    {  int a;int b;int w;
+      cin>>a>>b>>w;
+      rel[a].push_back({b,w});
+      rel[b].push_back({a,w});
+    }
+      priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>q;
+      q.push({1,0});
+      dist[1]=0;
+      while(!q.empty())
+  {   int curr=q.top().first;
+      int currd=q.top().second;
+        q.pop();
+        for(int i=0;i<rel[curr].size();i++)
+        {
+          if(currd+rel[curr][i].second<dist[rel[curr][i].first])
+          {
+            dist[rel[curr][i].first]=currd+rel[curr][i].second;
+            q.push({rel[curr][i].first,dist[rel[curr][i].first]});
+          }
+        }
+    
+  }
+
+   for(int i=1;i<=n;i++)
+    {cout<<dist[i]<<" ";}
+}
