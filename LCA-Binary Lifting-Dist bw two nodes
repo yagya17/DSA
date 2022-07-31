@@ -1,0 +1,102 @@
+#include <bits/stdc++.h>
+using namespace std;
+int level[100001];
+vector<int> rel[100001];
+const int maxn=log2(100001);
+int lca[100001][maxn+1];
+
+void dfs(int key, int lvl,int par)  //immediate parent
+{ lca[key][0]=par;
+  level[key]=lvl;
+  for(int i=0;i<rel[key].size();i++)
+  {
+    if(rel[key][i]!=par) dfs(rel[key][i],lvl+1,key);
+  }
+  
+}
+
+
+
+
+void init(int n)             //adding values to matrix
+{   dfs(1,0,-1);
+   
+  for(int i=1;i<=n;i++)
+  {
+    for(int j=1;j<=maxn;j++)
+    {
+      if(lca[i][j-1]!=-1)
+      {
+        int par=lca[i][j-1];
+        lca[i][j]=lca[par][j-1];
+      }
+    }
+  }
+
+}
+
+
+
+
+int lcafunct(int a,int b)
+{  
+  if(level[a]>level[b]) swap(a,b);
+  int d=level[b]-level[a];
+  while(d>0)
+  { int i=log2(d);
+    b=lca[b][i];
+     d=d-(1<<i);
+  }
+  if(a==b) return a;
+ for(int i=maxn;i>=0;i--)
+ {
+   if(lca[a][i]!=-1&&(lca[a][i]!=lca[b][i]))
+   {
+     a=lca[a][i];b=lca[b][i];
+   }
+ }
+ return lca[a][0];
+}
+
+int getdist(int a,int b)
+{
+  int dist=lcafunct(a,b);
+  return level[a]+level[b]-2*level[dist];
+  
+}
+
+
+
+int main()
+{   int n;cin>>n; //no. of nodes
+
+    //initialising//
+  for(int i=1;i<=n;i++)
+  {
+    for(int j=0;j<=maxn;j++)
+    {
+      lca[i][j]==-1;
+      
+    }
+  }
+  
+  //taking relations
+   for(int i=1;i<n;i++) //edges=n-1 (trees)
+   {
+     int a; cin>>a;
+     int b;cin>>b;
+     rel[a].push_back(b);
+     rel[b].push_back(a);
+   }
+   
+   
+   
+   init(n);
+   int q;cin>>q;
+   while(q--)
+   { int a;int b;
+   cin>>a>>b;
+   cout<<getdist(a,b)<<endl;
+     
+   }
+}
