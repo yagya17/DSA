@@ -2,17 +2,19 @@
 using namespace std;
 int level[100001];
 vector<int> rel[100001];
-void dfs(int key, int lvl,int par)
-{
+int par[100001];
+void dfs(int key, int lvl,int p)
+{ par[key]=p;
   level[key]=lvl;
   for(int i=0;i<rel[key].size();i++)
   {
-    if(rel[key][i]!=par) dfs(rel[key][i],lvl+1,key);
+    if(rel[key][i]!=p) dfs(rel[key][i],lvl+1,key);
   }
   
 }
 int lca(int a,int b)
 {
+ if(level[a]>level[b]) swap(a,b);
   int d=level[b]-level[a];
   while(d--)
   {
@@ -23,6 +25,7 @@ int lca(int a,int b)
   {a=par[a];
     b=par[b];
   }
+  return a;                     //OR return par[a]
 }
 int main()
 {   int n;cin>>n; //no. of nodes
@@ -35,9 +38,6 @@ int main()
      rel[b].push_back(a);
    }
    dfs(1,0,-1);
-   
-   
-   
-   
-   lca(a,b);
+   int a;int b;cin>>a>>b;
+   cout<<lca(a,b);
 }
