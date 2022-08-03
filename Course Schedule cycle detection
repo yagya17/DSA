@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int vis[5001];
+    vector<int>rel[5001];
+    bool sol(int key)
+    {  
+       if(vis[key]==1) return false;
+     if(vis[key]==0)
+     {  vis[key]=1;
+        for(int i=0;i<rel[key].size();i++)
+        { if(!sol(rel[key][i])) return false;
+
+        }
+     }
+        vis[key]=2;
+        return true;
+    }
+    
+    
+    bool canFinish(int numCourses, vector<vector<int>>& prereq) {
+        for(int i=0;i<=numCourses;i++) {vis[i]=0;rel[i].clear();}
+        
+        for(int i=0;i<prereq.size();i++)
+        {
+            rel[prereq[i][1]].push_back(prereq[i][0]);
+        }
+       
+        for(int i=0;i<prereq.size();i++)
+        {
+            
+            if(!sol(prereq[i][1])) return false;
+        }
+        return true;
+    }
+};
