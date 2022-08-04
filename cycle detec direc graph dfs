@@ -1,0 +1,29 @@
+
+ int vis[5001];
+    int visdfs[5001];
+
+bool dfs(int key)
+{
+    vis[key]=1;
+    visdfs[key]=1;
+    for(int i=0;i<rel[key].size();i++)
+    {
+        if(vis[key]==0){if(dfs(rel[key][i])) return true;}
+        else if(visdfs[rel[key][i]]==1) return true;
+    }
+    visdfs[key]=0;
+    return false;
+}
+bool main(int n, vector<vector<int>>& rel) {
+        for(int i=0;i<=numCourses;i++) {vis[i]=0;visdfs[i]=0;}
+      
+       
+           for(int i=0;i<numCourses;i++)
+        {
+            if(vis[i]==0){ if(dfs(i)) return false;}
+        }
+        return true;
+       
+    }
+    
+    //basic idea
