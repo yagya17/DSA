@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int vis[101];
+    int col[101];
+    bool sol(int key,int c,vector<vector<int>>& graph)
+    {vis[key]=1;
+     col[key]=c;
+        for(int i=0;i<graph[key].size();i++)
+        {
+            if(vis[graph[key][i]]==0) {if(sol(graph[key][i],c^1,graph)==false) return false;}
+            if(col[graph[key][i]]==col[key]) return false;
+        }
+     return true;
+    }
+    
+    bool isBipartite(vector<vector<int>>& graph) {
+        for(int i=0;i<graph.size();i++) { vis[i]=0;col[i]=-1;}
+        int c=0;
+        for(int i=0;i<graph.size();i++)
+        {
+            if(vis[i]==0){ if(! sol(i,0,graph)) return false;}
+        }
+        return true;
+    }
+};
