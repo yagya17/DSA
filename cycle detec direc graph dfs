@@ -1,22 +1,28 @@
-
- int vis[5001];
+class Solution {
+public:
+    int vis[5001];
     int visdfs[5001];
-
+    vector<int>rel[5001];
 bool dfs(int key)
 {
     vis[key]=1;
     visdfs[key]=1;
     for(int i=0;i<rel[key].size();i++)
     {
-        if(vis[key]==0){if(dfs(rel[key][i])) return true;}
+        if(vis[rel[key][i]]==0){if(dfs(rel[key][i])) return true;}
         else if(visdfs[rel[key][i]]==1) return true;
     }
     visdfs[key]=0;
     return false;
 }
-bool main(int n, vector<vector<int>>& rel) {
-        for(int i=0;i<=numCourses;i++) {vis[i]=0;visdfs[i]=0;}
-      
+    bool canFinish(int numCourses, vector<vector<int>>& prereq) {
+        for(int i=0;i<=numCourses;i++) {vis[i]=0;visdfs[i]=0;rel[i].clear();}
+        
+        for(int i=0;i<prereq.size();i++)
+        {
+            rel[prereq[i][1]].push_back(prereq[i][0]);
+            
+        }
        
            for(int i=0;i<numCourses;i++)
         {
@@ -25,5 +31,4 @@ bool main(int n, vector<vector<int>>& rel) {
         return true;
        
     }
-    
-    //basic idea
+};
