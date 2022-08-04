@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int in[5001];
+    vector<int>rel[5001];
+
+    bool canFinish(int numCourses, vector<vector<int>>& prereq) {
+        for(int i=0;i<=numCourses;i++) {in[i]=0;rel[i].clear();}
+        
+        for(int i=0;i<prereq.size();i++)
+        {
+            rel[prereq[i][1]].push_back(prereq[i][0]);
+           in[prereq[i][0]]++;
+        }
+        queue<int>q;
+           for(int i=0;i<numCourses;i++)
+        {
+            if(in[i]==0)q.push(i);
+        }
+            int c=numCourses;
+        while(!q.empty())
+        {
+            int curr=q.front();
+            q.pop();
+         c--;
+       for(int i=0;i<rel[curr].size();i++)
+        { 
+                in[rel[curr][i]]--;
+         if(in[rel[curr][i]]==0)q.push(rel[curr][i]);
+            
+        }
+        }
+        if(c)return false;
+            return true;
+    }
+};
