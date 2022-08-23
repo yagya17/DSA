@@ -1,3 +1,9 @@
+TC: O(N+M)
+SC: O(2N+M)
+
+
+
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
