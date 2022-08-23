@@ -1,0 +1,68 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* store1=l1;
+         ListNode* store2=l2;
+        int c1=0;int c2=0;
+        while(l1)
+        {
+            l1=l1->next;c1++;
+        }
+        while(l2)
+        {
+            l2=l2->next;c2++;
+        }
+       
+            stack<int>s1;
+            stack<int>s2;
+            int t=max(c1,c2)-min(c1,c2);
+        ListNode* max_node;ListNode* min_node;
+        if(c1>c2){max_node=store1; min_node=store2;}
+        else{max_node=store2; min_node=store1;}
+       while(t--)
+       {
+         s1.push(0);
+       }
+        while(min_node)
+        {
+            s1.push(min_node->val);min_node=min_node->next;
+        }
+          while(max_node)
+        {
+            s2.push(max_node->val);max_node=max_node->next;
+        }
+      //  if(s2.empty()) cout<<1;
+        
+        
+        int carry=0;
+        ListNode *ans=NULL;
+        ListNode *dummy=ans;
+        while(!s1.empty())
+        {
+           int sum= s1.top()+s2.top()+carry;
+            //cout<<1;
+            s1.pop();s2.pop();
+            if(sum>9) carry=sum/10;
+            else{carry=0;}
+            ListNode *newe=new ListNode(sum-carry*10);
+            newe->next=ans;
+            ans=newe;
+        }
+        
+        if(carry)
+        { ListNode *newe=new ListNode(carry);
+            newe->next=ans;
+            ans=newe;}
+        return ans;
+    }
+};
