@@ -1,0 +1,14 @@
+vector<int>v;
+void sol(Node *head,int level)
+{
+    if(head==NULL) return;
+   if(v.size()==level) v.push_back(head->data);
+   sol(head->left,level+1);
+   sol(head->right,level+1);
+}
+vector<int> leftView(Node *root)
+{
+    v.clear();
+  sol(root,0);
+  return v;
+}
