@@ -1,0 +1,23 @@
+ vector<int>ans;
+      if (!root) return ans;
+      map<int,int>m;
+      queue<pair<Node *,int>>q;
+      q.push({root,0});
+       Node* store=NULL;
+      while(!q.empty())
+      {
+          
+          store=q.front().first;
+           int line=q.front().second;
+          q.pop();
+          if(m.find(line)==m.end())m[line]=store->data;
+          if(store->left)
+          {
+              q.push({root->left,line-1});
+          }
+          
+           if(store->right){q.push({root->right,line+1});}
+          
+      }
+      for(auto i=m.begin();i!=m.end();i++){ ans.push_back(i->second);}
+      return ans;
