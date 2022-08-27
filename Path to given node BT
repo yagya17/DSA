@@ -1,0 +1,23 @@
+
+bool sol(TreeNode* a, int b, vector<int>&ans)
+ {   if(a==NULL){ return false;}
+    ans.push_back(a->val);
+     if(a->val==b)return true;
+     if(sol(a->left,b,ans)||sol(a->right,b,ans)) return true;
+     
+     
+     ans.pop_back();
+     return false;
+     
+ }
+vector<int> Solution::solve(TreeNode* a, int b) {
+   
+     vector<int>ans;
+    
+    sol(a,b,ans);
+    return ans;
+    
+    
+    
+    T.C: O(N)
+    S.C: O(N)
