@@ -1,0 +1,21 @@
+class Solution {
+public:
+      int res=INT_MIN;
+    int sol(TreeNode* root)
+    {
+       if(!root) return 0;
+        
+        int ans=1+max(sol(root->left),sol(root->right));
+        
+        //int temp=max(ans,sol(root->left)+sol(root->right)+1);
+        res=max(res,ans);
+        return ans;
+            
+    
+    }
+    int maxDepth(TreeNode* root) {
+        if(!root) return 0;
+        sol(root);
+        return res;
+    }
+};
