@@ -1,0 +1,20 @@
+class Solution {
+public:
+       
+    int sol(TreeNode* root, int &res)
+    {
+        if(root==NULL) return 0;
+        int l=sol(root->left,res);
+        int r=sol(root->right,res);
+        int temp=1+max(l,r);//
+         res=max(res,l+r+1);
+        return temp;//
+        
+        
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+     int res=INT_MIN;
+      sol(root,res);
+        return res-1;
+    }
+};
