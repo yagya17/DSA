@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+vector<int>res;
+bool isleaf(Node *root)
+{
+  if(root->left==NULL&&root->right==NULL) return true;
+  return false;
+}
+void left(Node *root)
+{ root=root->left
+while(root)
+{
+  if(!isleaf(root)) res.push_back(root->val);
+  if(root->left) root=root->left;
+  else root=root->right;
+}
+}
+void right(Node *root)
+{
+  vector<int>temp;
+  root=root->right;
+  while(root)
+  {
+    if(!isleaf(root)) temp.push_back(root->val);
+  if(root->right) root=root->right;
+  else root=root->left;
+  }
+  for(int i=temp.size()-1;i>=0;i--)
+  {res.push_back(temp[i]);}
+  
+}
+void leaves(Node *root)
+{
+  if(isleaf(root)) {res.push_back(root->val); return;}
+  if(root->left) leaves(root->left);
+  if(root->right) leaves(root->right);
+}
+
+
+vector<int> printBoundary(Node *root)
+{
+  res.clear();
+  if(!root) return res;
+  if(!isleaf(root)) res.push_back(root->data);
+ left(root);
+ leaves(root);
+ right(root);
+ return res;
+
+}
