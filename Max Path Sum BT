@@ -1,0 +1,26 @@
+class Solution {
+public:
+     int solve(int &ans, TreeNode* a)
+     {
+         if (a==NULL) return 0;
+         int left=solve(ans,a->left);
+         int right=solve(ans,a->right);
+         int temp=max(max(left,right)+a->val,a->val);
+         int res=max(temp,a->val+left+right);
+         ans=max(ans,res);
+         
+         return temp;
+     }
+    int maxPathSum(TreeNode* root) {
+     if (root==NULL) return 0;
+     
+       int ans=INT_MIN;
+        
+        solve(ans,root);
+        
+        return ans;
+    }
+};
+
+T.C.: O(N)
+S.C.: O(N)  (recursion stack)
