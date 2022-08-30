@@ -1,0 +1,61 @@
+T.C: O(N^2)
+
+
+class Solution {
+public:
+    bool sol(TreeNode* root)
+    {
+        if(root==NULL) return true;
+        
+        bool lh=sol(root->left);
+        bool rh=sol(root->right);
+        if(abs(ht(root->left)-ht(root->right))>1) return false;
+        if(!lh||!rh) return false;
+        return true;
+    }
+    int ht(TreeNode* root)
+    {
+        if(root==NULL) return 0;
+       int lh=ht(root->left);
+        int rh=ht(root->right);
+          return max(lh,rh)+1;
+    }
+    
+    
+    bool isBalanced(TreeNode* root) {
+        if(!root) return true;
+        return sol(root);
+        
+        
+       
+    }
+};
+
+
+
+T.C.: O(N)
+
+class Solution {
+public:
+ 
+    int ht(TreeNode* root)
+    {
+        if(root==NULL) return 0;
+       int lh=ht(root->left);
+        int rh=ht(root->right);
+        if(lh==-1||rh==-1) return -1;
+        if(abs(lh-rh)>1) return -1;
+          return max(lh,rh)+1;
+    }
+    
+    
+    bool isBalanced(TreeNode* root) {
+        if(!root) return true;
+        
+        if(ht(root)==-1) return false;
+        return true;
+        
+        
+       
+    }
+};
