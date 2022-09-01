@@ -1,0 +1,40 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* sol(int postst,int posten,int inst,int inen,map<int,int>&m,vector<int>& in, vector<int>& post)
+    {
+        if(inst>inen||postst>posten)
+        {return NULL;}
+        cout<<1;
+         TreeNode*root=new TreeNode(post[posten]);
+
+        int it=m[post[posten]];
+        int nums=it-inst;
+         root->left=sol(postst,postst+nums-1,inst,it-1,m,in,post);
+             root->right=sol(postst+nums,posten-1,it+1,inen,m,in,post);
+             return root;
+    }
+    TreeNode* buildTree(vector<int>& in, vector<int>& post) {
+        map<int,int>m;
+       for(int i=0;i<in.size();i++)
+       {
+           m[in[i]]=i;
+       }
+        TreeNode* root= sol(0,in.size()-1,0,post.size()-1,m,in,post);
+        return root;
+    }
+};
+
+
+T.C: O(N)
+S.C. O(N)
