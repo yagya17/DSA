@@ -1,0 +1,29 @@
+class Solution {
+  public:
+    // Function to convert a binary tree into its mirror tree.
+    void sol(Node* root)
+    {
+        if(root==NULL) return;
+        if(!root->left&&!root->right) return;
+       if(root->left){ Node*temp=root->left;
+       root->left=root->right;
+        root->right=temp;
+       }
+       else{
+           root->left=root->right;
+           root->right=NULL;
+           
+       }
+       mirror(root->left); mirror(root->right);
+       
+        
+    }
+    void mirror(Node* node) {
+       if(node==NULL) return;
+       sol(node);
+    }
+};
+
+
+T.C. : O(N)
+S.C. : O(N)
