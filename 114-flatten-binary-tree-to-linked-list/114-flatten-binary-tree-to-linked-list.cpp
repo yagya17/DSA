@@ -29,8 +29,12 @@ public:
         
     }
 };
+T.C. O(N)
+S.C. O(N)
 
-
+//
+  
+  
 class Solution {
 public:
   TreeNode* prev=NULL;
@@ -47,3 +51,32 @@ public:
         
     }
 };
+T.C. O(N)
+S.C. O(N)
+  
+//
+  
+  class Solution {
+public:
+    void flatten(TreeNode* root) {
+        TreeNode* dup=root;
+    while(dup)
+    { 
+        if(dup->left)
+        {
+            TreeNode* cur=dup->left;
+        while(cur->right) cur=cur->right;
+           cur->right=dup->right;
+            dup->right=dup->left;
+            dup->left=NULL;
+        }
+         dup=dup->right;
+        
+    }
+        
+    }
+};
+
+
+T.C. : O(N)
+S.C. : O(1)
