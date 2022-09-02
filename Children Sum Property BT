@@ -9,6 +9,7 @@ void sol(BinaryTreeNode < int > * root)
         if(root->left)root->left->data=root->data;
          if(root->right)root->right->data=root->data;
     }
+    else{root->data=child;}
     sol(root->left);
     sol(root->right);
     int newe=0;
@@ -19,7 +20,6 @@ void sol(BinaryTreeNode < int > * root)
 void changeTree(BinaryTreeNode < int > * root) {
   sol(root);
 }  
-
 
 
 T.C. : O(N)
