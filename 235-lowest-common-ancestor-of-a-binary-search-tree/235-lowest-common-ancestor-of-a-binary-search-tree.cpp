@@ -14,7 +14,7 @@ public:
     {    
         if(p->val>root->val&&q->val>root->val){return sol(root->right,p,q);}
         else if(p->val<root->val&&q->val<root->val) return sol(root->left,p,q);
-        else return root;
+        return root;
         
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
