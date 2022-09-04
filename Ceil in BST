@@ -1,0 +1,14 @@
+int findCeil(BinaryTreeNode<int> *root, int x){
+    int ans=INT_MAX;
+    while(root)
+    {
+        if(root->data>x){ans=min(ans,root->data);root=root->left;}
+        else if(root->data<x) {root=root->right;}
+        else{ ans=root->data;break;}
+    }
+    if(ans==INT_MAX) ans=-1;
+    return ans;
+}
+
+T.C. : O(H)
+S.C. : O(1)
