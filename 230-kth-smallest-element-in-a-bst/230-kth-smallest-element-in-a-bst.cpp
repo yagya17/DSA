@@ -11,6 +11,29 @@
  */
 class Solution {
 public:
+    vector<int>v;
+    void sol(TreeNode* root)
+    {   if(root==NULL) return;
+        sol(root->left);
+     v.push_back(root->val);
+        sol(root->right);
+      
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        sol(root);
+        
+        
+        return v[k-1];
+    }
+};
+
+T.C. : O(N)
+S.C. : O(N)+O(N) recursion
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class Solution {
+public:
     int cnt; int ans;
     void sol(TreeNode* root,int k)
     {   if(root==NULL) return;
@@ -28,3 +51,13 @@ public:
         return ans;
     }
 };
+
+
+T.C. : O(N)
+S.C. : O(N)
+    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
