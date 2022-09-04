@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+#include<string.h>
+#include <math.h>
+#define ll long long int
+using namespace std;
+
+int main()
+{ 
+  int t;cin>>t;
+  while(t--)
+  {    
+         int n;cin>>n; int ans=0;
+         for(int i=1;i<=n;i++)
+         {
+            int j=2*i;
+            int k=3*i;
+            if(j<=n) ans+=2;
+            if(k<=n) ans+=2;
+            ans+=1;
+         }
+         cout<<ans<<endl;
+  }
+}
