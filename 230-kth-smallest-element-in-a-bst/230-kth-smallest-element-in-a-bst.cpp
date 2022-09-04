@@ -11,19 +11,18 @@
  */
 class Solution {
 public:
-    priority_queue<int>q;
-    void sol(TreeNode* root, int k)
+    vector<int>v;
+    void sol(TreeNode* root)
     {   if(root==NULL) return;
-        q.push(root->val);
-       if(q.size()>k) {q.pop();}
-        sol(root->left,k);
-        sol(root->right,k);
+        sol(root->left);
+     v.push_back(root->val);
+        sol(root->right);
       
     }
     int kthSmallest(TreeNode* root, int k) {
-        sol(root,k);
+        sol(root);
         
         
-        return q.top();
+        return v[k-1];
     }
 };
