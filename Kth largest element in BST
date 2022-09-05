@@ -1,0 +1,24 @@
+class Solution
+{
+    public:
+    int cnt;int ans;
+    void sol(Node *root, int k)
+    {
+        if(root==NULL) return;
+        sol(root->right,k);
+        cnt++;
+        if(cnt==k){ans=root->data;return;}
+        
+        sol(root->left,k);
+        
+    }
+    
+    int kthLargest(Node *root, int k)
+    {cnt=0;
+    sol(root,k);
+    return ans;
+    }
+};
+
+T.C. : O(N)
+S.C. : O(N) (recursion) 
