@@ -39,6 +39,14 @@ public:
     }
 };
 
+
+// T.C. : O(H)
+// S.C. : O(1)
+
+
+
+
+
 /**
  * Your BSTIterator object will be instantiated and called as such:
  * BSTIterator* obj = new BSTIterator(root);
