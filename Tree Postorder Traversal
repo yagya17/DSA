@@ -1,3 +1,5 @@
+//RECURSIVE
+
 class Solution {
 public:
       vector<int>ans;
@@ -18,3 +20,22 @@ public:
         return ans;
     }
 };
+
+//ITERATIVE 
+stack<int>s1,s2;
+while(!s1.empty())
+{
+root=s1.top();
+s1.pop();
+s2.push(root);
+if(root->left) s1.push(root->left);
+if(root->right) s1.push(root->right);
+
+
+}
+while(!s2.empty())
+{
+postorder.push_back(s2.top()->val);
+s2.pop();
+}
+return postorder;
