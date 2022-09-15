@@ -9,6 +9,7 @@ public:
     }
     
     void addNum(int num) {
+       
         if(maxheap.empty()||maxheap.top()>num)
         {
             maxheap.push(num);
@@ -21,12 +22,14 @@ public:
     }
     
     double findMedian() {
+       
         if(maxheap.size()==minheap.size())
         {
             if(maxheap.empty()) return 0;
             else{double avg=(maxheap.top()+minheap.top())/2.0; return avg;}
         }
        else{
+           
            return maxheap.size()>minheap.size()?maxheap.top():minheap.top();
        }
     }
