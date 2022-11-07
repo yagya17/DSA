@@ -1,31 +1,28 @@
 class Solution {
 public:
     int divide(int dividend, int divisor) {
-        
-        //Handling corner cases
-        if(dividend==INT_MIN && divisor==-1) return INT_MAX;
-        if(dividend==INT_MIN && divisor==1) return INT_MIN;
-
-        
-        //Converting divisors and dividend to their positive values
-        long int dd = abs(dividend), dv = abs(divisor);
-        
-        //Result Variables
-        int res=0;
-        while(dv<=dd) {
-            long int mul=dv, tmp=1;
-            while(mul<=dd-mul) {
+        long long int cnt=0;
+        if(dividend==divisor) return 1;
+        long long num1=abs(dividend);
+        long long num2=abs(divisor);
+     
+        if(dividend==abs(divisor)||divisor==abs(dividend)) return -1;
+        while(num1>=num2)
+        {
+            long int mul=num2;long int temp=1;
+            while(num1-mul>=mul)
+            {
                 mul+=mul;
-                tmp+=tmp;
+               temp+=temp;
             }
-            res+=tmp;
-            dd-=mul;
+            cnt+=temp;
+            num1-=mul;
         }
+       
+        if(((long long)abs(dividend)!=dividend&&(long long)abs(divisor)==divisor)||((long long)abs(dividend)==dividend&&(long long)abs(divisor)!=divisor)){ cnt=cnt*(-1);}
         
-        //If either of dividend or divisor is negative our result will be negative
-        if((dividend<0&&divisor>0) || (dividend>0&&divisor<0)) return -res;
-        
-        return res;
-        
+        if(cnt>pow(2,31)-1) {cout<<1<<" ";return pow(2,31)-1;}
+        if(cnt<(-1)*pow(2,31)) {cout<<2<<" ";return (-1)*pow(2,31);}
+        return cnt;
     }
 };
