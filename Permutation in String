@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool checkInclusion(string p, string s) {
+        vector<int>ss(26,0);
+        vector<int>pp(26,0);
+     
+        if(p.size()>s.size()) return false;
+        for(int i=0;i<p.size();i++)
+        {
+            ss[s[i]-'a']++;
+            pp[p[i]-'a']++;
+        }
+         if(ss==pp) return true;
+        for(int i=p.size();i<s.size();i++)
+        {
+            ss[s[i]-'a']++;
+            ss[s[i-p.size()]-'a']--;
+            if(ss==pp) return true;
+        }
+        return false;
+    }
+};
