@@ -1,0 +1,32 @@
+class Solution {
+public:
+long long petrol=0;
+long long dfs(int curr,long long car_seats,vector<vector<int>>&adj, int par)
+{
+   long long child=1;cout<<1;
+    for(auto &it:adj[curr])
+    {
+      
+      if(it!=par) child+=dfs(it,car_seats,adj,curr);
+    }
+    if(curr==0) return petrol;
+   long long x=child; long long car=child/car_seats;
+   if(child%car_seats!=0) car++;
+   
+   petrol+=car;
+   return child;
+   
+}
+    long long minimumFuelCost(vector<vector<int>>& roads, int seats) {
+        petrol=0;
+        int n=roads.size();
+        vector<vector<int>>adj(n+1);
+        for(int i=0;i<n;i++)
+        {
+            adj[roads[i][0]].push_back(roads[i][1]);
+            adj[roads[i][1]].push_back(roads[i][0]);
+        }
+        
+        return dfs(0,seats,adj,-1);
+    }
+};
