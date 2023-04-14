@@ -1,0 +1,32 @@
+class Solution {
+public:
+void sol(vector<vector<int>>&adj,int prev, int node,string &labels, vector<int>&arr,vector<int>&m)
+{
+    int prevcnt=m[labels[node]-'a'];
+    m[labels[node]-'a']++;
+for(int child:adj[node])
+{
+if(child==prev) continue;
+sol(adj,node,child,labels,arr,m);
+    
+}
+
+arr[node]=m[labels[node]-'a']-prevcnt;
+}
+    vector<int> countSubTrees(int n, vector<vector<int>>& edges, string labels) {
+       
+        vector<int>m(26,0);
+         vector<int>arr(n,0);
+        vector<vector<int>>adj(n, vector<int>());
+         cout<<1;
+        for(vector<int>&edge: edges)
+        {
+            adj[edge[0]].push_back(edge[1]);
+            adj[edge[1]].push_back(edge[0]);
+          
+        }
+       
+        sol(adj,0,0,labels,arr,m);
+        return arr;
+    }
+};
