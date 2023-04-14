@@ -1,0 +1,30 @@
+class Solution {
+public:
+    long long distinctNames(vector<string>& ideas) {
+        int n=ideas.size(); 
+        unordered_set<string>one[26];
+        long long ans=0;
+        for(int i=0;i<n;i++)
+        {
+            one[ideas[i][0]-'a'].insert(ideas[i].substr(1));
+        }
+       
+        for(int i=0;i<25;i++)
+        {    
+            for(int j=i+1;j<26;j++)
+            {          int mut=0;
+                      for(auto &it:one[j])
+                      {
+                          if(one[i].count(it))
+                          mut++;
+                      }
+                      ans+=2LL*(one[i].size()-mut)*(one[j].size()-mut); 
+            }
+               
+            }
+
+         
+        
+        return ans;
+    }
+};
