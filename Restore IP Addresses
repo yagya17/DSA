@@ -1,0 +1,41 @@
+class Solution {
+public:
+vector<string>res;
+bool valid(string a)
+{
+    if(a.empty()||a.size()>3) return false;
+    if(a.size()&&stoi(a)>255) return false;
+    if(a.size()>1&&a[0]=='0') return false;
+    return true;
+}
+void sol(int ind, string s, string ans, int dots)
+{
+    if(dots==3) {
+        cout<<ans<<" ";
+        if(valid(s.substr(ind)))
+        {
+        res.push_back(ans+s.substr(ind));} 
+        return;
+         }
+  for(int i=1;i<=min(3,(int)s.size()-ind-1);i++)
+  {
+      if(valid(s.substr(ind,i)))
+      {
+          ans.push_back(s[i+ind-1]);
+          ans.push_back('.');
+          sol(ind+i,s,ans,dots+1);
+          ans.pop_back();
+         
+      }
+  }
+
+}
+
+   
+
+    vector<string> restoreIpAddresses(string s) {
+        string ans="";
+        sol(0,s,ans,0);
+        return res;
+    }
+};
