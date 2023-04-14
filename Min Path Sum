@@ -1,0 +1,19 @@
+class Solution {
+public:
+int t[201][201];
+int sol(int ans, int i,int j, int m, int n,vector<vector<int>>& grid)
+{
+  if(i>m-1 || j>n-1) return INT_MAX;
+  if(i==m-1&&j==n-1) return grid[i][j];
+  if(t[i][j]!=-1) return t[i][j];
+  ans=min(sol(ans,i+1,j,m,n,grid),sol(ans,i,j+1,m,n,grid))+grid[i][j]; 
+   return t[i][j]=ans;
+}
+    int minPathSum(vector<vector<int>>& grid) {
+        int i=grid.size();
+        int j=grid[0].size();
+        int ans=INT_MAX;
+        memset(t,-1,sizeof(t));
+        return  sol(ans,0,0,i,j,grid);
+    }
+};
