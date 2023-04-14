@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int shipWithinDays(vector<int>& w, int d) {
+        int n=w.size(); int maxi=INT_MIN; int sum=0;
+        for(int i=0;i<n;i++)
+        {
+            sum+=w[i];
+            maxi=max(w[i],maxi);
+        }
+        //cout<<maxi;
+        int l=maxi; int r=sum; int ans=INT_MAX;
+         while(l<=r)
+         {
+             int m=(l+r)/2;
+             int dayz=d;  int j=0;
+            while(j<n)
+            {
+                int s=0;
+                while(j<n&&s+w[j]<=m)
+                {
+                    
+                    s=s+w[j]; j++;
+                }
+                dayz--;
+
+            }
+            if(dayz>0) {ans=min(ans,m);r=m-1;}
+            else if(dayz<0) l=m+1;
+            else {ans=min(ans,m);r=m-1;}
+         }
+         return ans;
+    }
+};
