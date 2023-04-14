@@ -1,0 +1,20 @@
+class Solution {
+public:
+set<vector<int>>ans;
+void sol(vector<int>&nums, int ind,  vector<int> &res)
+{
+ if(ind==nums.size()) {if(res.size()>=2) ans.insert(res); return;}
+
+ if(res.empty()||res[res.size()-1]<=nums[ind]) {res.push_back(nums[ind]); sol(nums,ind+1,res); res.pop_back();}
+
+ sol(nums,ind+1,res);
+
+  
+
+}
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        vector<int>res;
+  sol(nums,0,res);
+        return vector(ans.begin(),ans.end());
+    }
+};
