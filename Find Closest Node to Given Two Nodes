@@ -1,0 +1,55 @@
+class Solution {
+public:
+    int closestMeetingNode(vector<int>& edges, int node1, int node2) {
+        int n=edges.size();
+        vector<int>n1(n,INT_MAX); vector<int>n2(n,INT_MAX);
+        n1[node1]=0; n2[node2]=0;
+        int a=edges[node1];int b=edges[node2]; int dist1=1; int dist2=1;
+        while(a!=-1&&b!=-1)
+        {
+            if(n1[a]!=INT_MAX||n2[b]!=INT_MAX) break;
+            n1[a]=dist1;  
+            n2[b]=dist2;
+            a=edges[a];b=edges[b];
+            dist1++; 
+            dist2++;
+        }
+        while(b!=-1&&n2[b]==INT_MAX)
+        {
+            n2[b]=dist2;
+            b=edges[b];
+            dist2++;
+        }
+        while(a!=-1&&n1[a]==INT_MAX)
+        {
+            n1[a]=dist1;
+            a=edges[a];
+            dist1++; 
+        }
+        
+        
+        // for(int i=0;i<n1.size();i++)
+        // cout<<n1[i]<<" ";
+        // cout<<endl;
+        // for(int i=0;i<n2.size();i++)
+        // cout<<n2[i]<<" ";
+
+        int i=0;
+        int ans; int res=INT_MAX; int fin=-1;
+        while(i<n)
+        {
+             ans=max(n1[i],n2[i]);
+            if(res>ans)
+            {
+                res=ans;
+                fin=i;
+            }
+               
+                
+                 i++;
+        }
+        
+        return fin;
+        
+    }
+};
