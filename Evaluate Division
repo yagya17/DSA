@@ -1,0 +1,41 @@
+class Solution {
+public:
+void sol(string curr, string curr2,unordered_map<string,int>&vis, double h,vector<double>&ans, map<string,vector<pair<string,double>>>&edg)
+{
+    cout<<curr<<" ";
+    vis[curr]=1;
+    if(curr.compare(curr2)==0) {ans.push_back(h);return;}
+
+            for(auto j:edg[curr])
+            {
+               
+                 if(vis[j.first]==0) {sol(j.first,curr2,vis,h*j.second,ans,edg);}
+            }
+            return ;
+}
+    vector<double> calcEquation(vector<vector<string>>& eq, vector<double>& val, vector<vector<string>>& que) {
+        
+        int n=eq.size();
+        map<string,vector<pair<string,double>>>edg;
+        for(int i=0;i<n;i++)
+        {
+            edg[eq[i][0]].push_back({eq[i][1],val[i]});
+            // edg[eq[i][0]].push_back({eq[i][0],1});
+            //  edg[eq[i][1]].push_back({eq[i][1],1});
+            edg[eq[i][1]].push_back({eq[i][0],1.0/val[i]});
+        }
+        
+        vector<double>ans;
+        for(int i=0;i<que.size();i++)
+        {
+            unordered_map<string,int>vis ;
+            string curr1=que[i][0]; string curr2=que[i][1];
+            int x=ans.size();
+            if(edg[curr1].size()==0) {ans.push_back(-1.0);continue;}
+            sol(curr1,curr2,vis,1.0,ans,edg);
+            if(ans.size()==x) ans.push_back(-1.0);
+
+        }
+        return ans;
+    }
+};
