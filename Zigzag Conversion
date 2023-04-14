@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string convert(string s, int n) {
+        int m=s.size();
+        if(n==1) return s;
+        string ans;  int j=0;
+        int sec=2*n-2;
+      for(int curr=0;curr<n;curr++)
+      {
+          int ind=curr;
+          while(ind<m)
+          {
+              ans+=s[ind];
+              if(curr!=0&&curr!=n-1){
+                  int newind=ind+sec-2*curr;
+                  if(newind<m) ans+=s[newind];
+              }
+              ind+=sec;
+          }
+      }
+      return ans;
+    }
+};
