@@ -1,0 +1,24 @@
+class Solution {
+public:
+int t[501][501];
+int sol(string &word1, string &word2,int  m, int n)
+{
+    if(m>=word1.size())return word2.size()-n;
+    if(n>=word2.size()) return word1.size()-m;
+    int ans;
+    if(t[m][n]!=-1) return t[m][n];
+    if(word1[m]==word2[n]) {
+        ans=sol(word1, word2, m+1, n+1);
+    }
+    else{
+ans=1+min(min(sol(word1,word2,m+1,n),sol(word1,word2,m,n+1)),sol(word1, word2,m+1,n+1));
+    }
+    return t[m][n]=ans;
+}
+    int minDistance(string word1, string word2) {
+      
+        memset(t,-1,sizeof(t));
+      return  sol(word1, word2, 0,0);
+
+    }
+};
