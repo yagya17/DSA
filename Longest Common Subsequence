@@ -1,0 +1,15 @@
+class Solution {
+public:
+int t[1050][1050];
+int sol(string &text1, string &text2, int m, int n)
+{
+    if(m>=text1.size()||n>=text2.size()) return 0;
+    if(t[m][n]!=-1) return t[m][n];
+if(text1[m]==text2[n]) return t[m][n]=1+sol(text1, text2,  m+1, n+1);
+else return t[m][n]=max(sol(text1, text2, m+1,n),sol(text1, text2, m,n+1));
+}
+    int longestCommonSubsequence(string text1, string text2) {
+        memset(t,-1,sizeof(t));
+        return sol(text1, text2, 0, 0);
+    }
+};
