@@ -1,0 +1,22 @@
+class Solution {
+public:
+int t[2550][2550];
+int sol(vector<int>&nums, int prev, int i)
+{
+    if(i>=nums.size()) return 0;
+    if(t[i][prev+1]!=-1) return t[i][prev+1];
+    int ans;
+  if(prev == -1 || nums[i]>nums[prev]) 
+    {     
+        ans = max(1+sol(nums, i,i+1), sol(nums, prev,i+1));
+        }
+    
+ else  {ans = sol(nums, prev,i+1);}
+    
+    return t[i][prev+1]=ans;
+}
+    int lengthOfLIS(vector<int>& nums) {
+         memset(t, -1, sizeof(t));
+         return  sol(nums, -1, 0);
+    }
+};
