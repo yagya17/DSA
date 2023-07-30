@@ -1,0 +1,25 @@
+class Solution {
+public:
+int t[201][20001];
+bool sol(vector<int>& nums, int curr, int i)
+{
+ if(curr==0) return true;
+ if(i==nums.size()) return false;
+ if(t[i][curr]!=-1) return t[i][curr];
+ bool ans;
+ if(curr-nums[i]>=0) ans = sol(nums, curr-nums[i], i+1) || sol(nums,curr, i+1);
+ else ans = sol(nums,curr, i+1);
+ return t[i][curr]=ans;
+
+}
+    bool canPartition(vector<int>& nums) {
+        int n=nums.size(); int sum = 0;
+        memset(t, -1, sizeof(t));
+        for(int i=0;i<n;i++)
+        {
+            sum+=nums[i];
+        }
+        if(sum%2!=0) return false;
+        return sol(nums, sum/2, 0);
+    }
+};
