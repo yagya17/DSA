@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int t[101][10001];
+    int sol(int e,int f)
+    {
+        if(t[e][f]!=-1) return t[e][f];
+        if(f==0||f==1) return t[e][f]=f;
+        if (e==1) return t[e][f]=f;
+        int mn=INT_MAX;
+        int hi=f; int lo=1;
+        int one=0;int two=0;
+        while(lo<=hi)
+        {    
+            int mid=lo+(hi-lo)/2;
+            if(t[e][f-mid]!=-1) one=t[e][f-mid];
+            else one=sol(e,f-mid);
+            if(t[e-1][mid-1]!=-1) two=t[e-1][mid-1];
+            else two=sol(e-1,mid-1);
+             if(one>two) lo=mid+1;
+             else hi=mid-1;
+         int temp=1+max(one,two);
+            mn=min(mn,temp);
+        }
+        t[e][f]=mn;
+        return mn;
+        
+        
+}
+    int superEggDrop(int k, int n) {
+        if(n==1||n==0) return n;
+        if(k==1) return n;
+        for(int i=0;i<k+1;i++)
+        {
+          for(int j=0;j<n+1;j++)
+          {
+          t[i][j]=-1; 
+          }
+        }
+        return sol(k,n);
+    }
+};
