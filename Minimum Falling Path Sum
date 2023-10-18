@@ -1,0 +1,31 @@
+class Solution {
+public:
+// int t[101][101];
+
+int sol(int i, int j, vector<vector<int>>& matrix, int n,vector<vector<int>> &t)
+{
+if(i==n) return 0;
+if(i>=n || j>=n || j<0) return INT_MAX;
+if(t[i][j]!=INT_MIN) return t[i][j];
+
+int left = sol(i+1, j-1, matrix, n, t);
+int down = sol(i+1, j, matrix, n, t);
+int right = sol(i+1, j+1, matrix, n, t);
+
+return t[i][j]=matrix[i][j]+min(min(left, right), down);
+
+}
+    int minFallingPathSum(vector<vector<int>>& matrix) {
+        int n=matrix.size();
+        int ans=INT_MAX;
+    vector<vector<int>> t(n, vector<int>(n, INT_MIN)); 
+
+        for(int i=0;i<n;i++)
+       {  
+        //  memset(t, INT_MIN, sizeof(t));
+        ans=min(ans, sol(0,i,matrix,n, t));
+       }
+
+        return ans;
+    }
+};
