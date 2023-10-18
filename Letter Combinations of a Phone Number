@@ -1,0 +1,38 @@
+class Solution {
+public:
+
+void sol(string &digits, int i,map<int,string>&m, int n, string s, vector<string>&ans)
+{
+    if(s.size()==n){cout<<s<<endl; ans.push_back(s);return;}
+    if(i==n) return;
+    string temp= m[digits[i]];
+    // cout<<temp<<endl;
+    for(int j=0;j<temp.size();j++)
+    {
+        s.push_back(temp[j]);
+        // cout<<s<<endl;
+        sol(digits, i+1, m, n, s, ans);
+        s.erase(s.end()-s.begin()-1);
+    }
+    return;
+}
+    vector<string> letterCombinations(string digits) {
+        int n=digits.size();
+        map<int, string>m;
+        m['2']="abc";
+        m['3']="def";
+        m['4']="ghi";
+        m['5']="jkl";
+        m['6']="mno";
+        m['7']="pqrs";
+        m['8']="tuv";
+        m['9']="wxyz";
+        vector<string>ans;
+        if(digits=="") return ans;
+
+        string s="";
+       sol(digits, 0, m, n,s ,ans);
+        return ans;
+     
+    }
+};
