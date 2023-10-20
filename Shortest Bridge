@@ -1,0 +1,52 @@
+class Solution {
+public:
+queue<pair<int,int>>q;
+
+void conn(int i, int j, vector<vector<int>>& grid)
+{
+int n=grid.size();
+if(i<0 || j<0 || j>=n || i>=n || grid[i][j]==2) return;
+if(grid[i][j]==0) return;
+q.push({i,j});
+grid[i][j]=2;
+conn(i+1, j, grid);
+conn(i, j+1, grid);
+conn(i-1, j, grid);
+conn(i,j-1,grid);
+}
+    int shortestBridge(vector<vector<int>>& grid) {
+        int n=grid.size();
+        int ans=INT_MAX; int x=0; int y=0;
+        bool flag=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(grid[i][j]==1){ x=i; y=j; conn(i, j, grid);flag=1;break;}
+            }
+            if(flag) break;
+        }
+        vector<pair<int,int>> adj({{1,0},{0, 1},{-1, 0},{0, -1}});
+        int dist=0;
+        while(!q.empty())
+        {
+            int size=q.size();
+            while(size--)
+            {
+            int x=q.front().first;
+            int y=q.front().second;
+            q.pop();
+            for(auto& [dir_x, dir_y]: adj)
+            {
+            int i=x+dir_x; int j=y+dir_y;
+            if(i<0 || j<0 || j>=n || i>=n || grid[i][j]==-1) continue;
+            if(grid[i][j]==1) return dist;
+            q.push({i,j});
+            grid[i][j]=-1;
+            }
+        }
+        dist++;
+        }
+        return -1;
+    }
+};
