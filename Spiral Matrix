@@ -1,0 +1,62 @@
+class Solution {
+public:
+bool is_valid(int i, int j, int m, int n, int start_m, int start_n)
+{
+    if(i>=m || j>=n || i<start_m || j<start_n) return 0;
+    return 1;
+}
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int>ans;
+        int m= matrix.size(); //i
+        int n=matrix[0].size(); //j
+        int start_m=0;
+        int start_n=0;
+        int i=0; int j=0;
+        int total_elements=m*n;
+        while(ans.size()<total_elements)
+        {
+            
+            while(j<n)
+            {
+                ans.push_back(matrix[i][j]);
+                j++;
+            }
+            j--;
+            i++;
+            if(ans.size()==total_elements) break;
+            while(i<m)
+            {
+                ans.push_back(matrix[i][j]);
+                i++;
+            }
+            i--;
+            j--;
+            if(ans.size()==total_elements) break;
+
+            while(j>=start_n)
+            {
+                ans.push_back(matrix[i][j]);
+                j--;
+            }
+            j++;
+            i--;
+            start_m++;
+            if(ans.size()==total_elements) break;
+        
+            while(i>=start_m)
+            {
+                ans.push_back(matrix[i][j]);
+                i--;
+            }
+            i++; j++;
+            if(ans.size()==total_elements) break;
+
+            n--;
+            m--;
+            start_n++;
+
+        }
+
+        return ans;
+    }
+};
