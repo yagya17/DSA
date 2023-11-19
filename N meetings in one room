@@ -1,0 +1,25 @@
+int maxMeetings(int start[], int end[], int n)
+    {
+        vector<pair<int,int>>pq;
+        for(int i=0;i<n;i++)
+        {
+            pq.push_back({end[i], start[i]});
+        }
+        sort(pq.begin(), pq.end());
+        // cout<<pq[0].first;
+        int st=0;
+        int en=0;
+        int cnt=1;
+        int i=0; int j=1;
+        while(j>i && j<n )
+        {
+            st=pq[j].second;
+            en=pq[i].first;
+            if(st<=en) {j++;}
+            else{
+                cnt++; i=j;j++;
+            }
+            
+        }
+        return cnt;
+    }
