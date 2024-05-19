@@ -1,0 +1,18 @@
+class Solution {
+public:
+vector<vector<int>>t;
+int helper(int m, int n, int i, int j)
+{
+    if(i>=m || j>=n) return 0;
+    if(t[i][j]!=-1) return t[i][j];
+    if(i==m-1 && j==n-1) { return t[i][j]=1;}
+    
+    t[i][j]=helper(m, n, i+1, j) + helper(m, n, i, j+1);
+    return t[i][j];
+}
+    int uniquePaths(int m, int n) {
+        t=vector<vector<int>>(m, vector<int>(n, -1));
+
+        return helper(m, n, 0, 0);
+    }
+};
