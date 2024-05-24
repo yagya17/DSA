@@ -1,0 +1,22 @@
+class Solution {
+public:
+int t[5001][2];
+int helper(int i, int n, vector<int>& prices, int last_sell,  int has_stock)
+{
+    if(i>=n) return 0;
+    if(t[i][has_stock]!=-1) return t[i][has_stock];
+    if(has_stock)
+    {
+     return t[i][has_stock]=max(helper(i+1,n,prices,last_sell,has_stock),prices[i]+helper(i+2,n,prices,i,0));
+    }
+    else{
+    return t[i][has_stock]=max(helper(i+1,n,prices,last_sell,has_stock),helper(i+1,n,prices,i,1)-prices[i]);
+    
+    }
+}
+    int maxProfit(vector<int>& prices) {
+        int n=prices.size();
+        memset(t, -1, sizeof(t));
+        return helper(0, n, prices, -2,  0);
+    }
+};
