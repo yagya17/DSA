@@ -1,0 +1,44 @@
+vector<long long> printFirstNegativeInteger(long long int a[],
+                                             long long int n, long long int k) {
+                                                 
+       vector<long long> first_negatives;
+       queue<long long>negatives;
+       
+       int i = 0;
+       int j = 0;
+       int cnt = 1;
+       while(j < n){
+           
+           if(a[j] < 0) {
+               
+               negatives.push(a[j]);
+           }
+           
+           if( j-i+1 < k) {
+               j++;
+           }
+           
+           else if( j-i+1 == k) {
+               
+               if(negatives.size()==0) {
+                   first_negatives.push_back(0);
+                   
+               }
+               
+               else{
+                   
+               first_negatives.push_back(negatives.front());
+               if(a[i]==negatives.front()){
+                   negatives.pop();
+               }
+               }
+               
+                i++;
+                j++;
+           }
+           
+           
+       }
+       
+       
+       return first_negatives;
