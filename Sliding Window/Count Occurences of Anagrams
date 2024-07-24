@@ -1,0 +1,38 @@
+int search(string pat, string txt) {
+	    int n = pat.size();
+	    int m = txt.size();
+	    map<int, int>freq;
+	    for(int i=0; i<n; i++){
+	        freq[pat[i]]++;
+	    }
+	    int i=0; int j=0;
+	    int unique_char = freq.size();
+	    int anagrams=0;
+	    while(j < m){
+	        
+        if(freq.find(txt[j]) != freq.end()){
+	            freq[txt[j]]--;
+	            if(freq[txt[j]]==0){
+	                unique_char--;
+	            }
+        }
+	        
+	    if(j-i+1 < n) j++;
+	    else if(j-i+1 == n){
+	        
+         if(unique_char == 0) anagrams++;
+            if(freq.find(txt[i]) != freq.end()){
+                freq[txt[i]]++; 
+                if(freq[txt[i]] == 1){
+                    unique_char++;
+                }
+            }
+            i++;
+            j++;
+	        
+	    }
+	            
+	    }
+	    
+	    return anagrams;
+	}
