@@ -1,0 +1,24 @@
+int lengthOfLongestSubstring(string s) {
+        int n = s.size();
+        map<int, int>freq;
+        int max_window = 0;
+        int i = 0; int j = 0;
+        while( j<n ){
+            
+            freq[s[j]]++;
+            
+            if(freq[s[j]] == 2){
+                while(freq[s[j]] == 2){
+                    freq[s[i]]--;
+                    i++;
+                }
+            }
+            else{
+                max_window = max(max_window, j-i+1);
+            }
+            j++;
+            
+        }
+
+        return max_window;
+    }
