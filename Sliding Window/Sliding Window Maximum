@@ -1,0 +1,29 @@
+vector<int> Solution::slidingMaximum(const vector<int> &arr, int w) {
+    if(w==1) return arr;
+    int n = arr.size();
+    int i =0; int j=0;
+    vector<int>max_in_window;
+    deque<int> possible_max;
+    
+    while(j<n){
+        
+        while(!possible_max.empty() && arr[j] > possible_max.back()){
+            possible_max.pop_back();
+        }
+        
+        possible_max.push_back(arr[j]);
+        if(j-i+1 == w){
+            max_in_window.push_back(possible_max.front());
+            
+            if(arr[i] == possible_max.front()){
+                possible_max.pop_front();
+            }
+            
+            i++; 
+        }
+        j++;
+        
+    }
+    
+    return max_in_window;
+}
