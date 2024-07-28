@@ -1,0 +1,45 @@
+string minWindow(string s, string t) {
+
+        int m = s.size();
+        int n = t.size();
+        int min_window = INT_MAX;
+        map<int, int>freq;
+        for(int i=0; i<n; i++){
+            freq[t[i]]++;
+        }
+        int elem_cnt = freq.size();
+        int i = 0; int j = 0; int start=0;
+
+        while(j<m){
+
+            if(freq.find(s[j])!=freq.end()){
+                freq[s[j]]--;
+                if(freq[s[j]]==0){
+                    elem_cnt--;
+
+                }
+            }
+
+            if(elem_cnt==0){
+
+                while(elem_cnt==0)
+                {
+                    if(freq.find(s[i]) != freq.end())
+                    {
+                        freq[s[i]]++;
+                        if(freq[s[i]]==1) elem_cnt++;
+                        if(min_window > j-i+1)
+                        {
+                            min_window = j-i+1;
+                            start = i;
+                        }
+
+                    }
+                    i++;
+                }
+            }
+            j++;
+
+        }
+        if(min_window==INT_MAX) return "";
+        return s.substr(start, min_window);
