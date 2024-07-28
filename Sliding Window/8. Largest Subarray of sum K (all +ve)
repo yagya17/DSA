@@ -1,0 +1,32 @@
+int findLargestSubarray(vector<int>arr, int k){
+    
+    int n = arr.size();
+    int max_window = 0;
+    int curr_sum = 0;
+    int i = 0; int j = 0;
+    
+    while(j < n){
+        
+
+        curr_sum += arr[j];
+
+        if(curr_sum == k){
+            
+            max_window = max(max_window, j-i+1);
+
+        }
+        
+        if(curr_sum > k){
+            
+            while(curr_sum > k && i<j){
+                curr_sum -= arr[i];
+                i++;
+            }
+        }
+        
+        j++;
+    }
+    
+    return max_window;
+    
+}
