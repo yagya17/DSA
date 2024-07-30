@@ -1,0 +1,30 @@
+int totalFruit(vector<int>& fruits) {
+    
+    int n = fruits.size();
+    int max_window = 0;
+    int i = 0; int j = 0;
+    int fruit_cnt = 0;
+    map<int, int>freq;
+    
+    while(j < n){
+        
+        freq[fruits[j]]++;
+        
+        if(freq[fruits[j]] == 1) fruit_cnt++;
+        
+        if(fruit_cnt <= 2){
+            max_window = max(max_window, j-i+1);
+        }
+        
+        while(fruit_cnt > 2){
+            
+            freq[fruits[i]]--;
+            if(freq[fruits[i]] == 0) fruit_cnt--;
+            i++;
+            
+        }
+        j++;
+    }
+    
+    return max_window;
+    }
