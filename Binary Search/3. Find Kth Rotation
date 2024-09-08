@@ -4,22 +4,27 @@ class Solution {
         int n = arr.size();
         int i = 0; int j = n-1;
         int res_ind = 0;
-        while(i < j){
+        while(i <= j){
             
+            if(arr[i] <= arr[j]) return i;
             int mid = i + (j - i)/2;
-            if(arr[mid] > arr[j]){
+            int prev = (mid + n - 1)%n;
+            int next = (mid + 1)%n;
+            if(arr[mid] <= arr[prev] && arr[mid] <= arr[next]){
                 
-                res_ind =  mid + 1;
+               return mid;
+            }
+            else if(arr[i] <= arr[mid]){
                 i = mid + 1;
             }
             
-            else{
+            else if(arr[j] >= arr[mid]){
                 
-                j = mid;
+                j = mid - 1;
             }
         }
         
-        return res_ind;
+        return -1;
         
     }
 };
