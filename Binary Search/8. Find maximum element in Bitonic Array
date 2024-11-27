@@ -1,4 +1,4 @@
-int findMaxBitonic(vector<int> a,int low,int high){ 
+int findMaxBitonic(vector<int> a){ 
     
     int n = a.size();
     int low = 0;
